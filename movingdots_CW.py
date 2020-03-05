@@ -33,6 +33,17 @@ with Loop(blocks) as block:
             Wait(until=fixation_point.disappear_time)
             kp=KeyPress(keys=["F","J"],duration=3., correct_resp=ds.current['CR'],
                         base_time = fixation_point.disappear_time['time'])
+        
+         # give feedback
+        with If(kp.correct):
+            # They got it right!
+            Label(text=u"\u2713", color='green', font_size=72,
+                duration=config['FEEDBACK_TIME'], font_name='DejaVuSans.ttf')
+        with Else():
+            # they got it wrong
+            Label(text=u"\u2717", color='red', font_size=72,
+                duration=config['FEEDBACK_TIME'], font_name='DejaVuSans.ttf')
+        
         Log(ds.current,
             name="trial_data", 
             pressed=kp.pressed,
@@ -49,6 +60,8 @@ with Loop(blocks) as block:
     with UntilDone():
             # Wait(until=rest.appear_time)
             kp=KeyPress(keys=["SPACEBAR"])
+
+
 
 
 with UntilDone():

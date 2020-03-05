@@ -16,6 +16,8 @@ numblocks = 5
 lenblocks = 4
 Left_coh = [0, 0.1, 0.2, 0.3]
 Right_coh = [0, 0.1, 0.2, 0.3] #2 layers of forloop
+correct_resps = ['F','J']
+
 for y in range(numblocks):
     dots_set = []
     for x in range(lenblocks): # trials in each block
@@ -36,7 +38,7 @@ for y in range(numblocks):
                 dots_set.append(trial_dots)
     for repeat in range(2):
         for same in Left_coh:
-            CR = None # equal
+            CR = correct_resps[repeat] # equal
             motion_props = [{"coherence": same, "direction": 180, "speed":s(110), "lifespan":2/60},
                             {"coherence": same, "direction": 0, "speed":s(110), "lifespan":2/60},
                             {"coherence": 1-same*2, "direction": 0, "direction_variance":180,"speed":s(450), "speed_variance":s(100), "lifespan":2/60}]
